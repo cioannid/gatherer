@@ -14,6 +14,11 @@ class ProjectsController < ApplicationController
     )
     @workflow.create
 
-    redirect_to projects_path
+    if @workflow.success?
+      redirect_to projects_path
+    else
+      @project = @workflow.project
+      render :new
+    end
   end
 end
